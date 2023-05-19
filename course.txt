@@ -1,0 +1,7 @@
+101 English 1
+102 Hindi 2
+103 Maths 3
+104 Science 4
+105 SocialScience 1
+106 GeneralKnowledge 6
+107 ComputerScience 7

@@ -1,6 +1,6 @@
 # Student-Registration-System
 
-Problem Statement : 
+## Problem Statement : 
 You need to develop a system for registration, allotment of classrooms for lectures as well as
 examination allotment for students. Maintain one database for students’ data. Every student
 has registered for five courses. Maintain information such as name of student, enrolment

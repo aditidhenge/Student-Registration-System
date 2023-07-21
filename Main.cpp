@@ -81,16 +81,12 @@ int main()
         i++;
     }
     printf("\n=========== Classrooms ==============\n");
-  //	inorderc(rootC,rootCL);
     printInOrder(rootCL);
-//    printInOrder(rootCL);
-    /*arrclass(rootCL);
-	coursetraverse(rootC,rootCL);
-    printseats(rootC);*/
+
     while(control_line!=0)
     {
         printf("\n____________________\n");
-		printf("0 -- exit\n");
+	printf("0 -- exit\n");
         printf("1 -- add student to student list\n");
         printf("2 -- delete a student from student list\n");
         printf("3 -- add course to course list\n");
@@ -102,103 +98,103 @@ int main()
         printf("9 -- print list of courses which have course-ids between course-id-1 and course-id-2");
 
         printf("\nEnter the number beside the function you want to execute : ");
-		scanf("%d",&control_line);
+	scanf("%d",&control_line);
 
         switch (control_line)
+	{
+		case 0: //Exit
 		{
-			case 0: //Exit
-			{
-				printf("User Interface exited");
-				break;
-			}
-			case 1:
-			{
-                int enrolment_num,c;
-                char name_student[50];
-                printf("Enter the enrolment number ");
-                scanf("%d",&enrolment_num);
-                printf("Enter the name of the student ");
-                scanf("%s",name_student);
-                for(int i=0 ; i<5 ; i++)
-                {
-                    printf("Enter the course ids");
-                    scanf("%d ",&c);
-                }
-                Student s1;
-                s1.enrolment_number=enrolment_num;
-                strcpy(s1.name,name_student);
-                for(int i=0 ; i<5 ; i++)
-                {
-                    s1.courses[i]=c;
-                }
-                root=insert(root,s1,rootC);
-                inorder_traversal(root);
-                break;
-            }
-            case 2:
-            {
-                int enrolment_num;
-                printf("Enter the enrolment number of the student you want to delete ");
-                scanf("%d",&enrolment_num);
-                root = deletenode(root,enrolment_num,rootC);
-                printf("Deleted successfully\n");
-                break;
-            }
-            case 3:
-            {
-                course c;
-                printf("Enter course id ");
-                scanf("%d",&c.id);
-                printf("Enter course name ");
-                scanf("%s",c.name);
-                printf("Enter slot ");
-                scanf("%d",&c.slot);
-                rootC=insertCourse(rootC,c);
-                break;
-            }
-            case 4:
-            {
-                int cID;
-                printf("Enter course id to delete ");
-                scanf("%d",&cID);
-                rootC=deleteCourse(rootC,cID);
-                break;
-            }
-            case 5:
-            {
-                inorderc(rootC,rootCL);
-                printc(rootC);
-                break;
-            }
-            case 6:
-            {
-            	coursetraverse(rootC,rootCL);
-            	printseats(rootC);
-            	break;
-			}	
-            case 7:
-            {
-                inorder_traversal(root);
-                break;
-            }
-            case 8:
-            {
-                print_courses(rootC);
-                break;
-            }
-            case 9:
-            {
-                int courseid1,courseid2;
-                printf("Enter course id's ");
-                scanf("%d %d",&courseid1,&courseid2);
-                RangeSearch(rootC,courseid1,courseid2);
-            }
-            default:
-			{
-				printf("Loop exited");
-				control_line=0;
-				break;
-			}
+			printf("User Interface exited");
+			break;
+		}
+		case 1:
+		{
+	                int enrolment_num,c;
+	                char name_student[50];
+	                printf("Enter the enrolment number ");
+	                scanf("%d",&enrolment_num);
+	                printf("Enter the name of the student ");
+	                scanf("%s",name_student);
+	                for(int i=0 ; i<5 ; i++)
+	                {
+	                    printf("Enter the course ids");
+	                    scanf("%d ",&c);
+	                }
+	                Student s1;
+	                s1.enrolment_number=enrolment_num;
+	                strcpy(s1.name,name_student);
+	                for(int i=0 ; i<5 ; i++)
+	                {
+	                    s1.courses[i]=c;
+	                }
+	                root=insert(root,s1,rootC);
+	                inorder_traversal(root);
+	                break;
+            	}
+	        case 2:
+	    	{
+			int enrolment_num;
+			printf("Enter the enrolment number of the student you want to delete ");
+			scanf("%d",&enrolment_num);
+			root = deletenode(root,enrolment_num,rootC);
+			printf("Deleted successfully\n");
+			break;
+	    	}
+            	case 3:
+            	{
+               		course c;
+	                printf("Enter course id ");
+	                scanf("%d",&c.id);
+	                printf("Enter course name ");
+	                scanf("%s",c.name);
+	                printf("Enter slot ");
+	                scanf("%d",&c.slot);
+	                rootC=insertCourse(rootC,c);
+	                break;
+            	}
+            	case 4:
+	    	{
+			int cID;
+			printf("Enter course id to delete ");
+			scanf("%d",&cID);
+			rootC=deleteCourse(rootC,cID);
+			break;
+	    	}
+            	case 5:
+            	{
+	                inorderc(rootC,rootCL);
+	                printc(rootC);
+	                break;
+            	}
+            	case 6:
+            	{
+	            	coursetraverse(rootC,rootCL);
+	            	printseats(rootC);
+	            	break;
+		}	
+            	case 7:
+            	{
+	                inorder_traversal(root);
+	                break;
+            	}
+            	case 8:
+            	{
+	                print_courses(rootC);
+	                break;
+            	}
+            	case 9:
+            	{
+	                int courseid1,courseid2;
+	                printf("Enter course id's ");
+	                scanf("%d %d",&courseid1,&courseid2);
+	                RangeSearch(rootC,courseid1,courseid2);
+            	}
+            	default:
+		{
+			printf("Loop exited");
+			control_line=0;
+			break;
+		}
         }
     }
     return 0;

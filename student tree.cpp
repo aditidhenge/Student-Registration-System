@@ -150,7 +150,6 @@ Student searchstudent(Node* node,int enrol)
 
 Node* deletenode(Node* node, int enrolment_number,course* root)
 {
-    // Base case: node is NULL or the node to be deleted is found
      Student s=searchstudent(node,enrolment_number);
      delete_from_course(root,s);
     if (node == NULL) 
@@ -159,18 +158,14 @@ Node* deletenode(Node* node, int enrolment_number,course* root)
     } 
     else if (enrolment_number < node->student.enrolment_number) 
     {
-        // The node to be deleted is in the left subtree
         node->left = deletenode(node->left, enrolment_number,root);
     } 
     else if (enrolment_number > node->student.enrolment_number) 
     {
-        // The node to be deleted is in the right subtree
         node->right = deletenode(node->right, enrolment_number,root);
     } 
     else 
     {
-        // Node to be deleted is found
-        // If the node has only one child or no child
         if (node->left == NULL || node->right == NULL) 
         {
             Node* temp = node->left ? node->left : node->right;
@@ -181,36 +176,32 @@ Node* deletenode(Node* node, int enrolment_number,course* root)
                 node = NULL;
             } 
             else 
-            { // If the node has one child
-                *node = *temp; // Copy the contents of the child to the node to be deleted
+            {
+                *node = *temp; 
             }
 
-            free(temp); // Free memory
+            free(temp);
             
         } 
         else 
-        { // If the node has two children
-            // Find the node with the minimum value in the right subtree
+        { 
             Node* temp = node->right;
             while (temp->left != NULL) 
             {
                 temp = temp->left;
             }
 
-            // Replace the node to be deleted with the minimum node
             node->student = temp->student;
 
-            // Delete the minimum node
             node->right = deletenode(node->right, temp->student.enrolment_number,root);
         }
     }
 
-    // If the tree had only one node and it is deleted, return NULL
     if (node == NULL) 
     {
         return node;
     }
-    // Update the height of the current node
+
     node->height = 1 + max(height(node->left), height(node->right));
 
     int balance = get_balance(node);

@@ -69,7 +69,7 @@ SNode* newnode(struct course_student student)
 
 SNode* insertstud(SNode* node,struct course_student student)
 {
-	 	if (node == NULL) 
+	 if (node == NULL) 
         {
             node = newnode(student);
         } 
@@ -114,7 +114,7 @@ void studinc(course* root,Student student)
 	{
 		c=searchcourse(student.courses[i],root);
 		struct course_student s;
-    	s.enrolment_number=student.enrolment_number;
+    		s.enrolment_number=student.enrolment_number;
 		strcpy(s.name,student.name);
 		c->sroot=insertstud(c->sroot,s);
 		c->count++;
@@ -123,65 +123,55 @@ void studinc(course* root,Student student)
 
 SNode* deletesnode(SNode* snode, int enrolment_number)
 {
-    // Base case: node is NULL or the node to be deleted is found
     if (snode == NULL) 
     {
         return snode;
     } 
     else if (enrolment_number < snode->student.enrolment_number) 
     {
-        // The node to be deleted is in the left subtree
         snode->left = deletesnode(snode->left, enrolment_number);
     } 
     else if (enrolment_number > snode->student.enrolment_number) 
     {
-        // The node to be deleted is in the right subtree
         snode->right = deletesnode(snode->right, enrolment_number);
     } 
     else 
     {
-        // Node to be deleted is found
-        // If the node has only one child or no child
         if (snode->left == NULL || snode->right == NULL) 
         {
             SNode* temp = snode->left ? snode->left : snode->right;
 
-            // If the node has no child
             if (temp == NULL) 
             {
                 temp = snode;
                 snode = NULL;
             } 
             else 
-            { // If the node has one child
-                *snode = *temp; // Copy the contents of the child to the node to be deleted
+            { 
+                *snode = *temp; 
             }
 
-            free(temp); // Free memory
+            free(temp); 
         } 
         else 
-        { // If the node has two children
-            // Find the node with the minimum value in the right subtree
+        {
             SNode* temp = snode->right;
             while (temp->left != NULL) 
             {
                 temp = temp->left;
             }
 
-            // Replace the node to be deleted with the minimum node
             snode->student = temp->student;
 
-            // Delete the minimum node
             snode->right = deletesnode(snode->right, temp->student.enrolment_number);
         }
     }
 
-    // If the tree had only one node and it is deleted, return NULL
     if (snode == NULL) 
     {
         return snode;
     }
-    // Update the height of the current node
+
     snode->height = 1 + Smax(Sheight(snode->left), Sheight(snode->right));
 
     int balance = Sget_balance(snode);
@@ -218,6 +208,6 @@ void delete_from_course(course* root,Student s)
     		c=searchcourse(s.courses[i],root);
     		printf("%d\n",c->id);
     		c->sroot=deletesnode(c->sroot,s.enrolment_number);
-		}
+	}
     	
 }

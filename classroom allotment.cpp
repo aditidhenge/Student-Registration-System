@@ -10,7 +10,7 @@ void for_same_slot(int n,course* root,AVLNode* node)
 		if(node->classroom.capacity >= root->count && node->classroom.roomNumber != n )
 		{
 			root->classroom = node->classroom.roomNumber;
-            arr[root->slot] = node->classroom.roomNumber;
+            		arr[root->slot] = node->classroom.roomNumber;
 		}
 		for_same_slot(n,root,node->left);
 	}
@@ -18,7 +18,7 @@ void for_same_slot(int n,course* root,AVLNode* node)
 
 AVLNode* allotclass(course* root,AVLNode* node)
 {
-	AVLNode* t=node;
+    AVLNode* t=node;
     if(node)
     {
         allotclass(root,node->left);
@@ -30,7 +30,7 @@ AVLNode* allotclass(course* root,AVLNode* node)
         }
         else if(arr[root->slot]!=root->id)
         {
-        	for_same_slot(arr[root->slot],root,t);
+            for_same_slot(arr[root->slot],root,t);
             return node;
         }
         allotclass(root,node->right);
@@ -44,7 +44,6 @@ void inorderc(course* root,AVLNode* node)
 	{
 		inorderc(root->left,node);
 		node=allotclass(root,node);
-        //printf("%d\n",root->id);
 		inorderc(root->right,node);
 	}
 }

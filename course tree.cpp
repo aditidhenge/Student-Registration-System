@@ -15,7 +15,7 @@ course* newNode(int id, char name[],int slot) {
     course *node = (course*) malloc(sizeof(course));
     node->id = id;
     strcpy(node->name, name);
-  	node->sroot=NULL;
+    node->sroot=NULL;
     node->left = NULL;
     node->right = NULL;
     node->height = 1;
@@ -75,7 +75,7 @@ course* insertCourse(course *node, course Course) {
     {
     	printf("Course already present\n");
     	return node;
-	}
+    }
     node->height = 1 + maxC(heightC(node->left), heightC(node->right));
 
     int balance = getBalanceC(node);
@@ -103,57 +103,48 @@ course* insertCourse(course *node, course Course) {
 
 course* deleteCourse(course* node, int courseid)
 {
-    // Base case: node is NULL or the node to be deleted is found
     if (node == NULL) 
     {
         return node;
     } 
     else if (courseid < node->id) 
     {
-        // The node to be deleted is in the left subtree
         node->left = deleteCourse(node->left, courseid);
     } 
     else if (courseid > node->id) 
     {
-        // The node to be deleted is in the right subtree
         node->right = deleteCourse(node->right, courseid);
     } 
     else 
     {
-        // Node to be deleted is found
-        // If the node has only one child or no child
         if(node->count == 0)
         {
             if (node->left == NULL || node->right == NULL) 
             {
                 course* temp = node->left ? node->left : node->right;
 
-                // If the node has no child
                 if (temp == NULL) 
                 {
                     temp = node;
                     node = NULL;
                 } 
                 else 
-                { // If the node has one child
-                    *node = *temp; // Copy the contents of the child to the node to be deleted
+                { 
+                    *node = *temp;
                 }
 
-                free(temp); // Free memory
+                free(temp);
             } 
             else 
-            { // If the node has two children
-                // Find the node with the minimum value in the right subtree
+            { 
                 course* temp = node->right;
                 while (temp->left != NULL) 
                 {
                     temp = temp->left;
                 }
 
-                // Replace the node to be deleted with the minimum node
                 node->id = temp->id;
 
-                // Delete the minimum node
                 node->right = deleteCourse(node->right, temp->id);
             }
         }
@@ -163,12 +154,11 @@ course* deleteCourse(course* node, int courseid)
         }
     }
 
-    // If the tree had only one node and it is deleted, return NULL
     if (node == NULL) 
     {
         return node;
     }
-    // Update the height of the current node
+
     node->height = 1 + maxC(heightC(node->left), heightC(node->right));
 
     int balance = getBalanceC(node);
@@ -255,7 +245,7 @@ course* insertCap(course *node, course Course) {
     {
     	printf("Course already present\n");
     	return node;
-	}
+    }
     node->height = 1 + maxC(heightC(node->left), heightC(node->right));
 
     int balance = getBalanceC(node);
@@ -280,7 +270,6 @@ course* insertCap(course *node, course Course) {
     return node;
 }
 
-
 //range search
 
 void RangeSearch(course* rootC,int id1,int id2)
@@ -295,4 +284,3 @@ void RangeSearch(course* rootC,int id1,int id2)
         RangeSearch(rootC->right,id1,id2);
     }
 }
-
